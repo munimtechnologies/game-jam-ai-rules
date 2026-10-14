@@ -4,17 +4,22 @@ import math
 import os
 import re
 import unittest
+from collections import defaultdict
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 FILES = {
     "page1": os.path.join(HERE, "data", "itch-jams-2026-10-14.csv"),
     "page2": os.path.join(HERE, "data", "itch-jams-2026-10-14-page2.csv"),
 }
+HISTORY_FILE = os.path.join(HERE, "data", "recurring-jams-history-2026-10-14.csv")
 COLUMNS = ["slug", "name", "url", "joined", "submissions_open_utc_as_listed", "policy", "scope", "quote",
            "cash_prize", "prize_notes"]
+HISTORY_COLUMNS = ["series", "slug", "name", "url", "host", "start_utc", "entries", "policy", "scope", "quote", "note"]
 POLICIES = ["banned_all", "banned_assets", "discouraged", "allowed_disclose", "allowed", "required", "not_stated"]
+HISTORY_POLICIES = POLICIES + ["banned_most"]
 ALLOWING = {"allowed_disclose", "allowed", "required"}
 PRIZES = {"no", "cash", "gift_card", "store_credit", "funding", "trip", "unclear"}
+READ_ON = "2026-10-14"
 
 
 def load(path):
@@ -24,6 +29,7 @@ def load(path):
 
 ROWS = {k: load(p) for k, p in FILES.items()}
 ALL = ROWS["page1"] + ROWS["page2"]
+HISTORY = load(HISTORY_FILE)
 with open(os.path.join(HERE, "README.md"), encoding="utf-8") as f:
     README = f.read()
 
@@ -57,6 +63,30 @@ def fisher_two_sided(a, b, c, d):
     obs = p(a)
     lo, hi = max(0, row1 + col1 - n), min(row1, col1)
     return sum(p(x) for x in range(lo, hi + 1) if p(x) <= obs * (1 + 1e-9))
+
+
+def by_year(rows):
+    """{year: [editions, editions with a ban, entries, entries under a ban]} for ended editions."""
+    out = defaultdict(lambda: [0, 0, 0, 0])
+    for r in rows:
+        if not r["entries"]:
+            continue
+        y, n, banned = int(r["start_utc"][:4]), int(r["entries"]), r["policy"].startswith("banned")
+        t = out[y]
+        t[0] += 1
+        t[1] += banned
+        t[2] += n
+        t[3] += n if banned else 0
+    return dict(out)
+
+
+def series_editions():
+    s = defaultdict(list)
+    for r in HISTORY:
+        s[r["series"]].append(r)
+    for v in s.values():
+        v.sort(key=lambda r: r["start_utc"])
+    return s
 
 
 class Dataset(unittest.TestCase):
@@ -135,6 +165,78 @@ class Dataset(unittest.TestCase):
         p = fisher_two_sided(a, b, c, d)
         self.assertTrue(0.09 < p < 0.12, p)
         self.assertIn("p ≈ 0.10", README)
+
+
+class History(unittest.TestCase):
+    def test_columns_and_rows(self):
+        with open(HISTORY_FILE, encoding="utf-8", newline="") as f:
+            self.assertEqual(next(csv.reader(f)), HISTORY_COLUMNS)
+        slugs = [r["slug"] for r in HISTORY]
+        self.assertEqual(len(slugs), len(set(slugs)), "an edition appears twice")
+        for r in HISTORY:
+            self.assertNotIn(None, r, r["slug"])
+            self.assertNotIn(None, r.values(), r["slug"])
+            self.assertEqual(r["url"], "https://itch.io/jam/" + r["slug"])
+            self.assertIn(r["policy"], HISTORY_POLICIES, r["slug"])
+            self.assertRegex(r["start_utc"], r"^\d{4}-\d\d-\d\d$")
+            # only editions that had not started when the pages were read lack an entry count
+            if r["entries"]:
+                self.assertRegex(r["entries"], r"^\d+$")
+                self.assertLess(r["start_utc"], READ_ON, r["slug"])
+            else:
+                self.assertGreater(r["start_utc"], READ_ON, r["slug"])
+            self.assertEqual(r["policy"] == "not_stated", r["quote"] == "", r["slug"])
+
+    def test_counts(self):
+        self.assertEqual(len(HISTORY), 55)
+        self.assertEqual(len(series_editions()), 11)
+        self.assertEqual(sum(bool(r["entries"]) for r in HISTORY), 51)
+        self.assertIn("**11 recurring jam series**", README)
+        self.assertIn("**55\neditions**", README)
+        self.assertIn("51 editions have ended", README)
+
+    def test_year_table_matches(self):
+        got = {}
+        for m in re.finditer(r"^\| (\d{4}) \| (\d+) \| (\d+) \| (\d+) \| (\d+) \| (\d+)% \|$", README, re.M):
+            got[int(m.group(1))] = [int(x) for x in m.groups()[1:]]
+        want = {y: t + [round(100 * t[3] / t[2])] for y, t in by_year(HISTORY).items()}
+        self.assertEqual(got, want)
+        self.assertEqual(want[2022], [4, 0, 6688, 0, 0])
+        self.assertEqual(want[2023], [14, 4, 11169, 699, 6])
+        self.assertEqual(want[2024], [12, 4, 16083, 4465, 28])
+        self.assertEqual(want[2025], [12, 8, 20687, 18452, 89])
+        self.assertEqual(want[2026], [8, 5, 15814, 14814, 94])
+
+    def test_without_gmtk(self):
+        rest = by_year([r for r in HISTORY if r["series"] != "GMTK Game Jam"])
+        shares = {y: round(100 * t[3] / t[2]) for y, t in rest.items() if y >= 2023}
+        self.assertEqual(shares, {2023: 16, 2024: 52, 2025: 80, 2026: 81})
+        self.assertIn("the share is 16% (2023), 52% (2024), 80% (2025) and 81% (2026)", README)
+        gmtk26 = [r for r in HISTORY if r["slug"] == "gmtk-jam-2026"][0]
+        self.assertEqual(gmtk26["entries"], "10531")
+        self.assertIn("10,531 entries in\n  2026", README)
+
+    def test_transitions(self):
+        adopted, allowing = [], []
+        for name, eds in series_editions().items():
+            policies = [r["policy"] for r in eds]
+            restrict = [p.startswith("banned") or p == "discouraged" for p in policies]
+            if policies[0] == "not_stated" and any(restrict):
+                adopted.append(name)
+            if any(p in ALLOWING for p in policies):
+                allowing.append(name)
+            # no series allows AI after it has banned it
+            first_ban = next((i for i, p in enumerate(policies) if p.startswith("banned")), None)
+            if first_ban is not None:
+                self.assertFalse(any(p in ALLOWING for p in policies[first_ban:]), name)
+        self.assertEqual(sorted(adopted), ["Boss Rush Jam", "Brackeys Game Jam", "GMTK Game Jam",
+                                           "Godot Wild Jam", "Kenney Jam", "SCREAM JAM"])
+        self.assertEqual(sorted(allowing), ["Game Off", "Gamedev.js Jam"])
+        self.assertIn("Six series adopted a restriction", README)
+        self.assertIn("No series went from a ban back to allowing AI", README)
+        # the earliest adoption found: Godot Wild Jam between #53 and #54
+        gwj = {r["slug"]: r["policy"] for r in HISTORY if r["series"] == "Godot Wild Jam"}
+        self.assertEqual((gwj["godot-wild-jam-53"], gwj["godot-wild-jam-54"]), ("not_stated", "banned_all"))
 
 
 if __name__ == "__main__":

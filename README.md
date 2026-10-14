@@ -8,6 +8,59 @@ We could not find any published dataset of those rules: the closest prior art is
 page automatically when you open it, and forum threads that quote a few jams. This repository records
 the rule for each jam with the sentence it comes from, so anyone can check it and count.
 
+## History: 11 recurring jams, 2021 to 2027 (read 14 October 2026)
+
+`data/recurring-jams-history-2026-10-14.csv` follows **11 recurring jam series** through **55
+editions**: SCREAM JAM, GMTK Game Jam, Brackeys, Godot Wild Jam, Kenney Jam, GitHub's Game Off,
+Gamedev.js, Boss Rush Jam, Bigmode, Pirate Software and GDevelop BIG Game Jam. itch.io keeps old jam
+pages online, so each past edition's rule can be read and dated. We found no earlier record of when
+jams adopted AI rules; searches of the web and arXiv turned up only single-jam rule pages and forum posts.
+
+51 editions have ended and list their entries; 4 are upcoming. Share of editions, and of submitted
+games, made under a rule that bans AI-made work in some form, by the year the edition started:
+
+| year | editions | with a ban | entries | entries under a ban | share of entries |
+|------|-----:|-----:|-----:|-----:|-----:|
+| 2021 | 1 | 0 | 217 | 0 | 0% |
+| 2022 | 4 | 0 | 6688 | 0 | 0% |
+| 2023 | 14 | 4 | 11169 | 699 | 6% |
+| 2024 | 12 | 4 | 16083 | 4465 | 28% |
+| 2025 | 12 | 8 | 20687 | 18452 | 89% |
+| 2026 | 8 | 5 | 15814 | 14814 | 94% |
+
+What it shows:
+
+- **In four years, AI bans went from none of these jams to almost all of their games.** No edition
+  read from 2021 or 2022 has an AI rule. In 2026, 94% of the games submitted to these series' ended
+  editions were made under a ban. GMTK, the largest jam on itch.io, weighs heavily (10,531 entries in
+  2026). Without it, the share is 16% (2023), 52% (2024), 80% (2025) and 81% (2026).
+- **Six series adopted a restriction, and the date can be pinned down.** Godot Wild Jam between #53
+  (January 2023) and #54 (February 2023), the earliest found; GMTK in August 2024 (a request, "We ask
+  that you do not use generative AI ... to create any assets or code"), turned into a ban on AI art and
+  audio in 2025; SCREAM JAM in October 2024, when it moved to a new host account; Boss Rush Jam in
+  January 2025; Brackeys in February 2025; Kenney Jam in July 2026. Bigmode and Pirate Software
+  already banned AI in the earliest editions found (November 2023 and January 2024).
+- **No series went from a ban back to allowing AI.** Once a rule appeared, it stayed or tightened:
+  Godot Wild Jam named code by #70 (June 2024), SCREAM JAM went from "most" generative AI (2024, 2025)
+  to "all" (2026), Pirate Software from "No AI-Generated Content" to "... of any kind" (2026), and
+  Kenney Jam's first rule (2026) bans "AI assisted" code, art and audio. Pirate Software's 2025 and
+  early-2026 pages simply have no AI sentence (the 2025 page has no rules section at all), and the ban
+  returns in July 2026.
+- **The two series that allow AI are run or sponsored by companies with AI products.** GitHub's Game
+  Off said in 2023 that AI tools "to help generate code, assets, or anything in between" are "welcome",
+  then dropped the sentence in 2024. Gamedev.js said nothing from 2023 to 2025 while giving GitHub
+  Copilot licences as prizes, and in 2026 wrote "Use of AI is totally allowed, and even encouraged".
+- GDevelop BIG Game Jam has no AI rule in any edition read (#5, #9, #10).
+
+Limits: a jam page shows its text today, and hosts can edit pages after a jam, so an old page may
+not show the rule exactly as it stood during the jam. Rules kept on separate pages, FAQs or Discord
+are not covered. The 11 series were chosen as large, well-known recurring jams on itch.io, not
+sampled at random, and the editions in between those listed were not read (for example Godot Wild
+Jam #56 to #59), so an adoption date is "between the last edition without and the first with".
+Pages were read on 14 October 2026 by an automated web reader that returned the AI-related sentences;
+a "no rule" row means none was returned. Classes as below, plus `banned_most` (all generative AI
+except models trained only on owned, licensed or opt-in data).
+
 ## Snapshot 1: 14 October 2026, pages 1 and 2
 
 The two files cover **77 video-game jams** from the first two pages of
@@ -50,14 +103,16 @@ What it shows:
   USD 10,000 and says AI is allowed "but you must clearly disclose it in your game description".
   Zoud GameLab (up to $140k in prizes and funding) allows disclosed AI in its FAQ.
 - **21 of 77 jams say nothing yet**, including several of the largest (Game Off, Brackeys, GDevelop
-  BIG Game Jam). Some publish full rules only when the jam starts.
+  BIG Game Jam). Some publish full rules only when the jam starts. (The history above shows Brackeys
+  has banned AI-generated content in every edition since 2025, so its 2026-27 page will likely follow.)
 
 ## How it was made, and its limits
 
 - Each jam page was read on 14 October 2026 (page 1 about 08:30 to 09:30 UTC, page 2 about 09:30 to
-  10:30 UTC) through an automated web reader, which returned the AI-related sentences and prize text.
-  The quotes are as returned; check a jam's page before relying on any single row. Quotes in Spanish
-  and Portuguese are kept in the original, with a translation in `prize_notes`.
+  10:30 UTC, the history about 10:30 to 11:30 UTC) through an automated web reader, which returned
+  the AI-related sentences and prize text. The quotes are as returned; check a jam's page before
+  relying on any single row. Quotes in Spanish and Portuguese are kept in the original, with a
+  translation in `prize_notes`.
 - One reader per page, one classifier (the author): there is no second coder, so borderline rows
   (for example "No AI-Generated content", classed as banned_all, or a jam that allows AI content only
   if it is "completely obvious that it was made by AI", classed as allowed_disclose) are judgement
@@ -79,7 +134,8 @@ that had no rule yet.
 python -m unittest -v
 ```
 
-checks that the CSVs are well formed and recomputes every number above, including the Fisher test.
+checks that the CSVs are well formed and recomputes every number above, including the Fisher test
+and the history table.
 
 ## Credit and licence
 

@@ -1,0 +1,56 @@
+series,slug,name,url,host,start_utc,entries,policy,scope,quote,note
+SCREAM JAM,scream-jam-2021,SCREAM JAM 2021,https://itch.io/jam/scream-jam-2021,Kitsch Digital,2021-10-13,217,not_stated,,,
+SCREAM JAM,scream-jam-2022,SCREAM JAM 2022+1,https://itch.io/jam/scream-jam-2022,Kitsch Digital,2023-04-16,144,not_stated,,,"Catch-up edition: ""WHOOPS! GUESS WE MISSED 2022!"""
+SCREAM JAM,scream-jam-2023,SCREAM JAM 2023,https://itch.io/jam/scream-jam-2023,Kitsch Digital; ryan zone,2023-10-17,479,not_stated,,,
+SCREAM JAM,scream-jam-2024,SCREAM JAM 2024,https://itch.io/jam/scream-jam-2024,SCREAM ZONE,2024-10-16,548,banned_most,"all generative AI except models trained only on owned, permissively licensed or opt-in data (disclosed)",Most generative AI (GenAI) technologies and generated content are prohibited from use in this jam.,"Linked policy (screamzone.org/wiki/policies/generative-ai) names DALL-E, ChatGPT, Stable Diffusion, Midjourney and GitHub Copilot as prohibited; Codeium and Sloyd as approved. New host account."
+SCREAM JAM,scream-jam-2025,SCREAM JAM 2025,https://itch.io/jam/scream-jam-2025,,2025-10-09,930,banned_most,"all generative AI except models trained only on owned, permissively licensed or opt-in data (disclosed)",Most generative AI (GenAI) technologies and generated content are prohibited from use in this jam.,
+SCREAM JAM,scream-jam-2026,SCREAM JAM 2026,https://itch.io/jam/scream-jam-2026,,2026-10-16,,banned_all,all generative AI,All generative AI technologies are banned from use in this jam.,Upcoming; from snapshot 1 (page 1).
+GMTK Game Jam,gmtk-jam-2022,GMTK Game Jam 2022,https://itch.io/jam/gmtk-jam-2022,,2022-07-15,6012,not_stated,,,
+GMTK Game Jam,gmtk-2023,GMTK Game Jam 2023,https://itch.io/jam/gmtk-2023,,2023-07-07,6679,not_stated,,,
+GMTK Game Jam,gmtk-2024,GMTK Game Jam 2024,https://itch.io/jam/gmtk-2024,,2024-08-16,7515,discouraged,assets and code (a request),"We ask that you do not use generative AI (such as Midjourney, ChatGPT, or Github Copilot) to create any assets or code.",
+GMTK Game Jam,gmtk-2025,GMTK Game Jam 2025,https://itch.io/jam/gmtk-2025,,2025-07-30,9515,banned_assets,art and audio banned; AI in general discouraged,"You must not use generative AI to make art or audio assets for your game, or your Itch.io page.","Also: ""In general, we ask that you do not use artificial intelligence"" and ""we are only able to actively police the use of generative AI for art and audio assets."" Breaking the rule means disqualification."
+GMTK Game Jam,gmtk-jam-2026,GMTK Game Jam 2026,https://itch.io/jam/gmtk-jam-2026,Game Maker's Toolkit,2026-07-22,10531,banned_assets,art and audio banned; AI in general discouraged,"You must not use generative AI to make art or audio assets for your game, or your Itch.io page.",Same three sentences as 2025. Entries from the results page (the jam page rounds to 10.5k).
+GMTK Game Jam,gmtk-2027,GMTK Game Jam 2027,https://itch.io/jam/gmtk-2027,,2027-08-11,,banned_assets,art and audio (code not mentioned),Your game must not use AI generated art or audio assets,Upcoming; from snapshot 1 (page 1).
+Brackeys Game Jam,brackeys-9,Brackeys Game Jam 2023.1,https://itch.io/jam/brackeys-9,Brackeys,2023-02-12,724,not_stated,,,
+Brackeys Game Jam,brackeys-10,Brackeys Game Jam 2023.2,https://itch.io/jam/brackeys-10,Brackeys,2023-08-20,904,not_stated,,,
+Brackeys Game Jam,brackeys-11,Brackeys Game Jam 2024.1,https://itch.io/jam/brackeys-11,Brackeys,2024-02-11,775,not_stated,,,
+Brackeys Game Jam,brackeys-12,Brackeys Game Jam 2024.2,https://itch.io/jam/brackeys-12,Brackeys,2024-09-08,1471,not_stated,,,
+Brackeys Game Jam,brackeys-13,Brackeys Game Jam 2025.1,https://itch.io/jam/brackeys-13,Brackeys,2025-02-16,2153,banned_all,all AI-generated content,No AI-Generated content.,
+Brackeys Game Jam,brackeys-14,Brackeys Game Jam 2025.2,https://itch.io/jam/brackeys-14,Brackeys,2025-08-24,2268,banned_all,all AI-generated content,No AI-Generated content.,
+Brackeys Game Jam,brackeys-15,Brackeys Game Jam 2026.1,https://itch.io/jam/brackeys-15,Brackeys,2026-02-15,1421,banned_all,all AI-generated content,No AI-Generated content.,
+Brackeys Game Jam,brackeys-16,Brackeys Game Jam 2026.2,https://itch.io/jam/brackeys-16,Brackeys,2026-08-23,2243,banned_all,all AI-generated content,No AI-Generated content.,
+Godot Wild Jam,godot-wild-jam-50,Godot Wild Jam #50,https://itch.io/jam/godot-wild-jam-50,Godot Wild Jam; Bakenshake,2022-10-14,72,not_stated,,,Entries as in the page header.
+Godot Wild Jam,godot-wild-jam-52,Godot Wild Jam #52,https://itch.io/jam/godot-wild-jam-52,Godot Wild Jam,2022-12-09,54,not_stated,,,Entries as in the page header.
+Godot Wild Jam,godot-wild-jam-53,Godot Wild Jam #53,https://itch.io/jam/godot-wild-jam-53,Godot Wild Jam,2023-01-13,173,not_stated,,,
+Godot Wild Jam,godot-wild-jam-54,Godot Wild Jam #54,https://itch.io/jam/godot-wild-jam-54,Godot Wild Jam,2023-02-10,79,banned_all,all AI-generated work (code not named),No AI generated work.,First edition with the rule among those read. Entries as in the page header.
+Godot Wild Jam,godot-wild-jam-55,Godot Wild Jam #55,https://itch.io/jam/godot-wild-jam-55,Godot Wild Jam,2023-03-10,91,banned_all,all AI-generated work (code not named),No AI generated work.,Entries as in the page header.
+Godot Wild Jam,godot-wild-jam-60,Godot Wild Jam #60,https://itch.io/jam/godot-wild-jam-60,Godot Wild Jam; Dawk,2023-08-11,45,banned_all,all AI-generated work (code not named),No AI generated work.,Entries as in the page header.
+Godot Wild Jam,godot-wild-jam-70,Godot Wild Jam #70,https://itch.io/jam/godot-wild-jam-70,Godot Wild Jam,2024-06-14,201,banned_all,"all AI-generated work, code named",No AI generated work.,"Adds: ""This includes using tools to create assets for your game as well as using AI tools to program your game."""
+Godot Wild Jam,godot-wild-jam-80,Godot Wild Jam #80,https://itch.io/jam/godot-wild-jam-80,Godot Wild Jam,2025-04-11,198,banned_all,"all AI-generated work, code named",No AI generated work.,Same wording as #70.
+Kenney Jam,kenney-jam-2023,Kenney Jam 2023,https://itch.io/jam/kenney-jam-2023,Kenney,2023-07-21,446,not_stated,,,
+Kenney Jam,kenney-jam-2024,Kenney Jam 2024,https://itch.io/jam/kenney-jam-2024,Kenney,2024-07-19,459,not_stated,,,
+Kenney Jam,kenney-jam-2025,Kenney Jam 2025,https://itch.io/jam/kenney-jam-2025,Kenney; Kay Lousberg,2025-07-18,706,not_stated,,,
+Kenney Jam,kenney-jam-2026,Kenney Jam 2026,https://itch.io/jam/kenney-jam-2026,Kenney; Kay Lousberg,2026-07-17,568,banned_all,"generative or AI-assisted code, art and audio","Generative AI or AI assisted (code, art or audio)","Listed under ""Not allowed""."
+Game Off,game-off-2022,Game Off 2022,https://itch.io/jam/game-off-2022,GitHub; Lee Reilly,2022-11-01,550,not_stated,,,
+Game Off,game-off-2023,Game Off 2023,https://itch.io/jam/game-off-2023,GitHub; Lee Reilly,2023-11-01,609,allowed,"AI tools welcome for code and assets, no disclosure rule","The use AI tools to help generate code, assets, or anything in between is also welcome.",Quoted as on the page.
+Game Off,game-off-2024,Game Off 2024,https://itch.io/jam/game-off-2024,GitHub; Lee Reilly,2024-11-01,507,not_stated,,,The 2023 sentence is gone; the page has no rules or FAQ section.
+Game Off,game-off-2025,Game Off 2025,https://itch.io/jam/game-off-2025,GitHub; Lee Reilly,2025-11-01,709,not_stated,,,
+Gamedev.js Jam,gamedevjs-2023,Gamedev.js Jam 2023,https://itch.io/jam/gamedevjs-2023,End3r; Enclave Games,2023-04-13,191,not_stated,,,
+Gamedev.js Jam,gamedevjs-2024,Gamedev.js Jam 2024,https://itch.io/jam/gamedevjs-2024,End3r; Enclave Games,2024-04-13,225,not_stated,,,No rule; GitHub Copilot licences offered as prizes.
+Gamedev.js Jam,gamedevjs-2025,Gamedev.js Jam 2025,https://itch.io/jam/gamedevjs-2025,End3r; Enclave Games,2025-04-13,408,not_stated,,,No rule; GitHub Copilot licences offered as prizes.
+Gamedev.js Jam,gamedevjs-2026,Gamedev.js Jam 2026,https://itch.io/jam/gamedevjs-2026,End3r; Enclave Games,2026-04-13,483,allowed,"AI allowed and encouraged, within copyright law","Use of AI is totally allowed, and even encouraged, as long as you don't break any copyright laws.","AI credits (Berrry, Gemini, GitHub Copilot) offered as prizes."
+Boss Rush Jam,boss-rush-jam-2023,BOSS RUSH JAM 2023,https://itch.io/jam/boss-rush-jam-2023,FartFish; swagshaw; and others,2023-01-17,121,not_stated,,,
+Boss Rush Jam,boss-rush-jam-2024,BOSS RUSH JAM 2024,https://itch.io/jam/boss-rush-jam-2024,FartFish; swagshaw,2024-01-05,383,not_stated,,,"No rule; a music sponsor advertises ""non-generative"" tracks."
+Boss Rush Jam,boss-rush-jam-2025,Boss Rush Jam 2025,https://itch.io/jam/boss-rush-jam-2025,FartFish; swagshaw,2025-01-02,843,banned_all,all AI-generated content,No use of AI-generated content.,Rule 17.
+Bigmode Game Jam,bigmode-2023,Bigmode Game Jam 2023,https://itch.io/jam/bigmode-2023,BIGMODEsean,2023-11-27,484,banned_all,all AI-generated work,No AI generated work.,First edition.
+Bigmode Game Jam,bigmode-game-jam-2025,Bigmode Game Jam 2025,https://itch.io/jam/bigmode-game-jam-2025,BIGMODEsean,2025-01-24,815,banned_all,all AI-generated work,No AI generated work.,
+Pirate Software Game Jam,pirate14,Pirate Software - Game Jam 14,https://itch.io/jam/pirate14,Pirate Software,2024-01-12,1371,banned_all,all AI-generated content,No AI-Generated Content.,Earliest edition found (pirate13 returns 404).
+Pirate Software Game Jam,pirate15,Pirate Software - Game Jam 15,https://itch.io/jam/pirate15,Pirate Software,2024-07-17,2345,banned_all,all AI-generated content,No AI-Generated Content.,
+Pirate Software Game Jam,pirate16,Pirate Software - Game Jam 16,https://itch.io/jam/pirate16,Pirate Software,2025-01-17,1730,banned_all,all AI-generated content,No AI-Generated Content.,
+Pirate Software Game Jam,pirate17,Pirate Software - Game Jam 17,https://itch.io/jam/pirate17,Pirate Software,2025-07-17,412,not_stated,,,The page has no rules section at all (only voting criteria); not a stated change of policy.
+Pirate Software Game Jam,pirate18,Pirate Software - Game Jam 18,https://itch.io/jam/pirate18,Pirate Software,2026-01-17,124,not_stated,,,No AI sentence found on the page; whether it has a rules section was not checked.
+Pirate Software Game Jam,pirate19,Pirate Software - Game Jam 19,https://itch.io/jam/pirate19,Pirate Software,2026-07-15,51,banned_all,all AI-generated content,No AI-Generated Content of any kind.,
+Pirate Software Game Jam,pirate,Pirate Software - Game Jam 20,https://itch.io/jam/pirate,Pirate Software,2027-01-17,,banned_all,all AI-generated content,No AI-Generated Content of any kind.,Upcoming.
+GDevelop BIG Game Jam,gdevelop-big-game-jam-5,GDevelop BIG Game Jam #5,https://itch.io/jam/gdevelop-big-game-jam-5,GDevelop; HelperWesley,2024-05-17,283,not_stated,,,
+GDevelop BIG Game Jam,gdevelop-big-game-jam-9,GDevelop BIG Game Jam #9,https://itch.io/jam/gdevelop-big-game-jam-9,GDevelop; HelperWesley,2026-05-15,393,not_stated,,,
+GDevelop BIG Game Jam,gdevelop-big-game-jam-10,GDevelop BIG Game Jam #10,https://itch.io/jam/gdevelop-big-game-jam-10,,2026-11-06,,not_stated,,,Upcoming; from snapshot 1 (page 1).
