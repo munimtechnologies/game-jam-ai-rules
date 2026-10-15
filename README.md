@@ -61,6 +61,47 @@ Pages were read on 14 October 2026 by an automated web reader that returned the 
 a "no rule" row means none was returned. Classes as below, plus `banned_most` (all generative AI
 except models trained only on owned, licensed or opt-in data).
 
+## The other side: jams that require AI (read 15 October 2026)
+
+`data/ai-required-jams-2026-10-15.csv` lists **15 editions of 6 itch.io jams whose rules require AI**:
+every one we could find by searching itch.io and the web for AI, AI-powered and vibe-coding jams.
+`required` means the entrant must use generative AI (some set a share: "50% or more", "majority");
+`required_tool` means the entrant must use the sponsor's AI product. Jams that only allow or
+encourage AI are left out (for example Just Vibe It!, "Here, we encourage it"), and so is MuleRun's
+jam, whose page links its rules elsewhere.
+
+| series | host | editions | first edition | entries | cash prize |
+|--------|------|-----:|------|-----:|------|
+| AI Browser Game Jam | Focaccai | 5 | 2026-02 | 273 | no |
+| Ultimate AI-Powered Game Jam | michyo | 5 | 2026-07 | 141 | no |
+| Slapjam | slapjam | 2 | 2026-09 | 139 | cash |
+| Vibe Summer Game Jam | MCheca; Haaaaaayden | 1 | 2026-08 | 34 | cash |
+| Falling in Love with Vibe Coding | Makko AI | 1 | 2026-02 | 1 | store credit |
+| The AI Game Jam | William | 1 | 2023-10 | 0 | no |
+
+Entries are those of ended editions, as shown in each jam page's header.
+
+What it shows:
+
+- **AI-required jams are a 2026 phenomenon.** The only earlier one found (October 2023) received no
+  entries. All 12 editions with entries started in 2026, and together they hold **588 games**.
+- **They are growing, but from far behind.** The AI Browser Game Jam went from 29 entries (February)
+  to 125 (August), 4.3 times as many, and its fifth edition had 177 people joined before it opened.
+  Slapjam's first edition drew 139 entries in 48 hours. Still, the 11 large series above received
+  14,814 games under an AI ban in 2026 alone: 25 times as many as every AI-required edition found.
+- **Requiring AI rarely comes with money.** Only Slapjam and the Vibe Summer Game Jam offer cash, and
+  the Vibe Summer prize is paid only if winners meet the hosts' quality bar. The two jams that require
+  a sponsor's tool are, in effect, product promotions; the two largest series (Focaccai's and
+  michyo's) are run by individuals with no prizes at all.
+- **Hosts' own counts run higher than the page headers.** Where a host states its entry counts
+  (the AI Browser Game Jam 5 page, the Slapjam #2 page), 4 of 5 are higher than the header now shows
+  (429 against 412 in total). Entries removed after a jam would explain it; we use the header.
+
+Limits: found by search, not drawn from a full list of itch.io jams, so smaller AI-required jams are
+likely missing; the counts are a floor. One series (Ultimate AI-Powered) had its fifth edition still
+in rating when read. Read through the same automated web reader as the history, so some quotes are
+cut at its length limit (marked in `note`).
+
 ## Snapshot 1: 14 October 2026, pages 1 and 2
 
 The two files cover **77 video-game jams** from the first two pages of
@@ -112,7 +153,8 @@ What it shows:
   10:30 UTC, the history about 10:30 to 11:30 UTC) through an automated web reader, which returned
   the AI-related sentences and prize text. The quotes are as returned; check a jam's page before
   relying on any single row. Quotes in Spanish and Portuguese are kept in the original, with a
-  translation in `prize_notes`.
+  translation in `prize_notes`. The AI-required jams were read the same way on 15 October 2026,
+  about 01:30 to 02:30 UTC.
 - One reader per page, one classifier (the author): there is no second coder, so borderline rows
   (for example "No AI-Generated content", classed as banned_all, or a jam that allows AI content only
   if it is "completely obvious that it was made by AI", classed as allowed_disclose) are judgement
@@ -134,8 +176,8 @@ that had no rule yet.
 python -m unittest -v
 ```
 
-checks that the CSVs are well formed and recomputes every number above, including the Fisher test
-and the history table.
+checks that the CSVs are well formed and recomputes every number above, including the Fisher test,
+the history table and the AI-required table.
 
 ## Credit and licence
 

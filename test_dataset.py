@@ -12,14 +12,19 @@ FILES = {
     "page2": os.path.join(HERE, "data", "itch-jams-2026-10-14-page2.csv"),
 }
 HISTORY_FILE = os.path.join(HERE, "data", "recurring-jams-history-2026-10-14.csv")
+REQUIRED_FILE = os.path.join(HERE, "data", "ai-required-jams-2026-10-15.csv")
 COLUMNS = ["slug", "name", "url", "joined", "submissions_open_utc_as_listed", "policy", "scope", "quote",
            "cash_prize", "prize_notes"]
 HISTORY_COLUMNS = ["series", "slug", "name", "url", "host", "start_utc", "entries", "policy", "scope", "quote", "note"]
+REQUIRED_COLUMNS = ["series", "slug", "name", "url", "host", "start_utc", "entries", "host_claimed_entries", "policy",
+                    "scope", "quote", "cash_prize", "note"]
 POLICIES = ["banned_all", "banned_assets", "discouraged", "allowed_disclose", "allowed", "required", "not_stated"]
 HISTORY_POLICIES = POLICIES + ["banned_most"]
+REQUIRED_POLICIES = ["required", "required_tool"]
 ALLOWING = {"allowed_disclose", "allowed", "required"}
 PRIZES = {"no", "cash", "gift_card", "store_credit", "funding", "trip", "unclear"}
 READ_ON = "2026-10-14"
+REQUIRED_READ_ON = "2026-10-15"
 
 
 def load(path):
@@ -30,6 +35,7 @@ def load(path):
 ROWS = {k: load(p) for k, p in FILES.items()}
 ALL = ROWS["page1"] + ROWS["page2"]
 HISTORY = load(HISTORY_FILE)
+REQUIRED = load(REQUIRED_FILE)
 with open(os.path.join(HERE, "README.md"), encoding="utf-8") as f:
     README = f.read()
 
@@ -237,6 +243,89 @@ class History(unittest.TestCase):
         # the earliest adoption found: Godot Wild Jam between #53 and #54
         gwj = {r["slug"]: r["policy"] for r in HISTORY if r["series"] == "Godot Wild Jam"}
         self.assertEqual((gwj["godot-wild-jam-53"], gwj["godot-wild-jam-54"]), ("not_stated", "banned_all"))
+
+
+def ended(rows):
+    return [r for r in rows if r["entries"]]
+
+
+class Required(unittest.TestCase):
+    def test_columns_and_rows(self):
+        with open(REQUIRED_FILE, encoding="utf-8", newline="") as f:
+            self.assertEqual(next(csv.reader(f)), REQUIRED_COLUMNS)
+        slugs = [r["slug"] for r in REQUIRED]
+        self.assertEqual(len(slugs), len(set(slugs)), "an edition appears twice")
+        history_slugs = {r["slug"] for r in HISTORY}
+        for r in REQUIRED:
+            self.assertNotIn(None, r, r["slug"])
+            self.assertNotIn(None, r.values(), r["slug"])
+            self.assertNotIn(r["slug"], history_slugs)
+            self.assertEqual(r["url"], "https://itch.io/jam/" + r["slug"])
+            self.assertIn(r["policy"], REQUIRED_POLICIES, r["slug"])
+            self.assertIn(r["cash_prize"], PRIZES, r["slug"])
+            self.assertRegex(r["start_utc"], r"^\d{4}-\d\d-\d\d$")
+            self.assertTrue(r["quote"], r["slug"])
+            if r["entries"]:
+                self.assertRegex(r["entries"], r"^\d+$")
+                self.assertLess(r["start_utc"], REQUIRED_READ_ON, r["slug"])
+            else:
+                self.assertGreater(r["start_utc"], REQUIRED_READ_ON, r["slug"])
+            if r["host_claimed_entries"]:
+                self.assertRegex(r["host_claimed_entries"], r"^\d+$")
+
+    def test_series_table_matches(self):
+        got = {}
+        for m in re.finditer(r"^\| ([^|]+?) \| ([^|]+?) \| (\d+) \| (\d{4}-\d\d) \| (\d+) \| (no|cash|store credit) \|$",
+                             README, re.M):
+            got[m.group(1)] = [m.group(2), int(m.group(3)), m.group(4), int(m.group(5)), m.group(6)]
+        want = {}
+        series = defaultdict(list)
+        for r in REQUIRED:
+            series[r["series"]].append(r)
+        for name, eds in series.items():
+            eds.sort(key=lambda r: r["start_utc"])
+            prizes = {r["cash_prize"] for r in eds}
+            prize = "cash" if "cash" in prizes else "store credit" if "store_credit" in prizes else "no"
+            want[name] = [eds[-1]["host"] if len(eds) == 1 else eds[0]["host"].split(";")[0],
+                          len(eds), eds[0]["start_utc"][:7], sum(int(r["entries"]) for r in ended(eds)), prize]
+        self.assertEqual(got, want)
+        self.assertEqual((len(REQUIRED), len(series)), (15, 6))
+        self.assertIn("**15 editions of 6 itch.io jams whose rules require AI**", README)
+
+    def test_headlines(self):
+        done = ended(REQUIRED)
+        with_entries = [r for r in done if int(r["entries"]) > 0]
+        self.assertEqual((len(done), len(with_entries)), (13, 12))
+        self.assertTrue(all(r["start_utc"] >= "2026" for r in with_entries))
+        self.assertEqual([r["slug"] for r in done if r["start_utc"] < "2026"], ["cool-ai-game-jam"])
+        total = sum(int(r["entries"]) for r in done)
+        self.assertEqual(total, 588)
+        self.assertIn("All 12 editions with entries started in 2026", README)
+        self.assertIn("**588 games**", README)
+        # Focaccai growth
+        fo = {r["slug"]: r for r in REQUIRED}
+        self.assertEqual((fo["ai-browser-game-jam"]["entries"], fo["ai-jam-4"]["entries"]), ("29", "125"))
+        self.assertEqual(round(125 / 29, 1), 4.3)
+        self.assertIn("4.3 times as many", README)
+        self.assertEqual(fo["slapjam-ai-1"]["entries"], "139")
+        # against the bans of the 11 large series in 2026
+        banned_2026 = by_year(HISTORY)[2026][3]
+        self.assertEqual(banned_2026, 14814)
+        self.assertEqual(round(banned_2026 / total), 25)
+        self.assertIn("14,814 games under an AI ban in 2026 alone: 25 times as many", README)
+        # cash
+        cash = [r["slug"] for r in REQUIRED if r["cash_prize"] == "cash"]
+        self.assertEqual(sorted(cash), ["slapjam-ai-1", "slapjam-ai-2", "vibe-summer-game-jam-26"])
+        self.assertEqual(sum(r["policy"] == "required_tool" for r in REQUIRED), 2)
+
+    def test_host_counts(self):
+        both = [r for r in REQUIRED if r["host_claimed_entries"] and r["entries"]]
+        higher = [r for r in both if int(r["host_claimed_entries"]) > int(r["entries"])]
+        self.assertEqual((len(higher), len(both)), (4, 5))
+        self.assertEqual(sum(int(r["host_claimed_entries"]) for r in both), 429)
+        self.assertEqual(sum(int(r["entries"]) for r in both), 412)
+        self.assertTrue(all(int(r["host_claimed_entries"]) >= int(r["entries"]) for r in both))
+        self.assertIn("4 of 5 are higher than the header now shows\n  (429 against 412 in total)", README)
 
 
 if __name__ == "__main__":
