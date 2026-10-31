@@ -6,13 +6,17 @@ By MV2 of Munim, Inc., made with AI agents (Anthropic Claude). Written before an
 hand_codes.csv has one row per jam that mentions agents: slug,hand_code,note where hand_code is one of
 restrict (restricts AI agents as participants), allow (allows them) or tools (about agentic tools only).
 A prediction whose inputs are missing is "not testable", never "holds".
+
+0.2.1 (2026-10-31, after the data was seen): adds hand_code none, for a page whose match is not a rule at all
+(for example an entrant's account address in the page's list of entries). P7 counts only the jams the reader
+coded agent_restrict, so this code cannot change P7; it only lets every agent jam be hand-coded truthfully.
 """
 import argparse
 import csv
 import json
 import sys
 
-HAND_CODES = {"restrict", "allow", "tools"}
+HAND_CODES = {"restrict", "allow", "tools", "none"}
 CORE = {"P1", "P2", "P7"}
 
 

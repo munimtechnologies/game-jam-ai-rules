@@ -55,6 +55,14 @@ class Grade(unittest.TestCase):
         self.assertEqual(out["predictions"]["P7"]["verdict"], "fails")
         self.assertEqual(out["p7"]["hand_restrict_of_auto"], 1)
 
+    def test_none_counts_as_hand_coded_and_leaves_p7_alone(self):
+        # 0.2.1: "none" marks a match that is not a rule; P7 still looks only at the automated restrict jams
+        with_none = gr.grade(summary(), {"a": "restrict", "b": "restrict", "c": "restrict", "d": "none"})
+        with_allow = gr.grade(summary(), {"a": "restrict", "b": "restrict", "c": "restrict", "d": "allow"})
+        self.assertEqual(with_none["predictions"]["P7"], with_allow["predictions"]["P7"])
+        self.assertEqual(with_none["p7"]["unhand_coded"], [])
+        self.assertEqual(with_none["p7"]["hand_counts"]["none"], 1)
+
     def test_hand_file(self):
         with tempfile.TemporaryDirectory() as d:
             p = os.path.join(d, "hand.csv")

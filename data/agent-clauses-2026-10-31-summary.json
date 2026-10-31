@@ -1,0 +1,99 @@
+{
+  "note": "Reader 0.2 summary of the 2026-10-31 run (590 itch.io jam pages, in-progress and upcoming listings). Counts are exactly as the reader produced them. In agent_jams, sentences from the jam host's own text are quoted; matches that came from the page's list of entries (entrants' account addresses and entry blurbs) are only counted, never named. CC BY 4.0, MV2 of Munim, Inc.",
+  "read_on": "2026-10-31",
+  "reader_version": "0.2",
+  "jams_read": 590,
+  "listed": 590,
+  "parsed_ok": true,
+  "by_listing": {
+    "in-progress": 332,
+    "upcoming": 258
+  },
+  "mentions_ai": 384,
+  "mentions_ai_share": 0.6508,
+  "mentions_agent": 6,
+  "mentions_agent_share": 0.0102,
+  "agent_restrict": 1,
+  "agent_not_restrict": 5,
+  "median_joined_agent": 277.5,
+  "median_joined_other": 16.5,
+  "mentions_ilands": 3,
+  "agent_jams": [
+    {
+      "slug": "20-second-game-jam-2026",
+      "title": "20 Second Game Jam 2026",
+      "listing": "in-progress",
+      "joined": 1393,
+      "agent_restrict": true,
+      "agent_terms": ["ai agents", "ilands"],
+      "host_sentences": [
+        "AI agents (including but not limited to iLands) should not join this jam and will have their entries removed"
+      ],
+      "entry_list_matches": 0
+    },
+    {
+      "slug": "slapjam-ai-2",
+      "title": "Slapjam #2",
+      "listing": "in-progress",
+      "joined": 314,
+      "agent_restrict": false,
+      "agent_terms": ["ai entrants"],
+      "host_sentences": [
+        "Solo creators, teams and autonomous AI entrants are welcome."
+      ],
+      "entry_list_matches": 0
+    },
+    {
+      "slug": "1-bit-jam-15",
+      "title": "1-BIT JAM 15 + Prizes",
+      "listing": "in-progress",
+      "joined": 241,
+      "agent_restrict": false,
+      "agent_terms": ["ilands"],
+      "host_sentences": [],
+      "entry_list_matches": 1
+    },
+    {
+      "slug": "playtest-feedback-exchange-jam-9",
+      "title": "Playtest & Feedback Exchange Jam #9",
+      "listing": "in-progress",
+      "joined": 238,
+      "agent_restrict": false,
+      "agent_terms": ["ai agent", "ai agents"],
+      "host_sentences": [
+        "For AI Agents",
+        "Following rules apply only to AI Agents",
+        "Always make it clear you are an AI Agent, preferably even so that when someone checks the \"submissions\" page, he can already see from the info shown there that this entry is made by AI Agent.",
+        "You can, however, playtest other AI Agents games."
+      ],
+      "entry_list_matches": 0
+    },
+    {
+      "slug": "playtest-feedback-exchange-jam-10",
+      "title": "Playtest & Feedback Exchange Jam #10",
+      "listing": "in-progress",
+      "joined": 31,
+      "agent_restrict": false,
+      "agent_terms": ["ai agent", "ai agents", "ilands"],
+      "host_sentences": [
+        "For AI Agents",
+        "Following rules apply only to AI Agents",
+        "Always make it clear you are an AI Agent, preferably even so that when someone checks the \"submissions\" page, he can already see from the info shown there that this entry is made by AI Agent.",
+        "You can, however, playtest other AI Agents games."
+      ],
+      "entry_list_matches": 5
+    },
+    {
+      "slug": "2026-epic-ai-megajam",
+      "title": "2026 Epic AI MegaJam",
+      "listing": "upcoming",
+      "joined": 2654,
+      "agent_restrict": false,
+      "agent_terms": ["ai agents"],
+      "host_sentences": [
+        "As many AI agents as you want."
+      ],
+      "entry_list_matches": 0
+    }
+  ]
+}
